@@ -1,0 +1,11 @@
+D:\Duyen\Study\AsyncApp\AsyncApp\bin\Debug\AsyncApp.exe.config
+D:\Duyen\Study\AsyncApp\AsyncApp\bin\Debug\AsyncApp.exe
+D:\Duyen\Study\AsyncApp\AsyncApp\bin\Debug\AsyncApp.pdb
+D:\Duyen\Study\AsyncApp\AsyncApp\obj\Debug\AsyncApp.csprojResolveAssemblyReference.cache
+D:\Duyen\Study\AsyncApp\AsyncApp\obj\Debug\AsyncApp.Form1.resources
+D:\Duyen\Study\AsyncApp\AsyncApp\obj\Debug\AsyncApp.Properties.Resources.resources
+D:\Duyen\Study\AsyncApp\AsyncApp\obj\Debug\AsyncApp.csproj.GenerateResource.Cache
+D:\Duyen\Study\AsyncApp\AsyncApp\obj\Debug\AsyncApp.exe
+D:\Duyen\Study\AsyncApp\AsyncApp\obj\Debug\AsyncApp.pdb
+D:\Duyen\Study\AsyncApp\AsyncApp\bin\Debug\Dapper.dll
+D:\Duyen\Study\AsyncApp\AsyncApp\bin\Debug\Dapper.xml
