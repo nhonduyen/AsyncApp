@@ -49,7 +49,7 @@ namespace AsyncApp
         {
             var sql = "SELECT COUNT(1) AS CNT FROM PRODUCT WHERE 1=1 " + query;
             var result = await DBManager<PRODUCT>.ExecuteScalar(sql);
-            return result;
+            return Convert.ToInt32(result);
         }
         public virtual async Task<int> Update1Column(int ID, string COLUMN, string VALUE)
         {

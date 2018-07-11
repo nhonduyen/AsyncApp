@@ -12,9 +12,6 @@ namespace AsyncApp
 {
     public partial class Form1 : Form
     {
-        protected int Total = 0;
-        protected int Page = 0;
-        protected int CurrentPage = 1;
 
         public Form1()
         {
@@ -32,7 +29,7 @@ namespace AsyncApp
             BULKCOPY bulk = new BULKCOPY();
             var result = await bulk.Insert(txtName.Text.Trim(), Convert.ToInt32(txtPrice.Text));
             MessageBox.Show(result.ToString() + " Inserted", "Info");
-            await LoadData(Convert.ToInt32(lblCurPage.Text));
+            await LoadData(Convert.ToInt32(lblCurPage.Text)).ConfigureAwait(false);
         }
 
         private async void btnUpdate_Click(object sender, EventArgs e)
@@ -40,7 +37,7 @@ namespace AsyncApp
             BULKCOPY bulk = new BULKCOPY();
             var result = await bulk.UpdateByName(txtName.Text.Trim(), Convert.ToInt32(txtPrice.Text));
             MessageBox.Show(result.ToString() + " Updateted", "Info");
-            await LoadData(Convert.ToInt32(lblCurPage.Text));
+            await LoadData(Convert.ToInt32(lblCurPage.Text)).ConfigureAwait(false);
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
@@ -51,7 +48,7 @@ namespace AsyncApp
                 BULKCOPY bulk = new BULKCOPY();
                 var result = await bulk.DeleteByName(txtName.Text.Trim());
                 MessageBox.Show(result.ToString() + " Deleted", "Info");
-                await LoadData(Convert.ToInt32(lblCurPage.Text));
+                await LoadData(Convert.ToInt32(lblCurPage.Text)).ConfigureAwait(false);
             }
         }
 
@@ -60,14 +57,15 @@ namespace AsyncApp
             var name = txtName.Text.Trim();
             if (!string.IsNullOrWhiteSpace(name))
             {
-                await LoadData(1, "AND NAME='" + name + "'");
+                await LoadData(1, "AND NAME LIKE '" + name + "%'");
+                DisableButton();
             }
-            DisableButton();
+
         }
 
         private async void btnPrev_Click(object sender, EventArgs e)
         {
-            var query = string.IsNullOrWhiteSpace(txtName.Text.Trim()) ? "" : "AND NAME='"+txtName.Text.Trim()+"'";
+            var query = string.IsNullOrWhiteSpace(txtName.Text.Trim()) ? "" : "AND NAME='" + txtName.Text.Trim() + "'";
             var page = Convert.ToInt32(lblCurPage.Text) - 1;
             await LoadData(page, query);
             DisableButton();
@@ -84,7 +82,7 @@ namespace AsyncApp
         private async void btnCount_Click(object sender, EventArgs e)
         {
             BULKCOPY bulk = new BULKCOPY();
-            var count = await bulk.GetCount();
+            var count = await bulk.GetCount().ConfigureAwait(false);
             MessageBox.Show(count.ToString(), "Total record");
         }
 
@@ -121,6 +119,8 @@ namespace AsyncApp
         private async void btnReload_Click(object sender, EventArgs e)
         {
             await LoadData();
+            DisableButton();
+            txtName.Text = txtPrice.Text = "";
         }
 
         private void DisableButton()

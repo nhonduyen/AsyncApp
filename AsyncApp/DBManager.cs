@@ -28,8 +28,7 @@ namespace AsyncApp
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                var result = await db.QueryAsync(sql, param, commandType: type);
-                return result;
+                return await db.QueryAsync(sql, param, commandType: type);
             }
         }
 
@@ -37,8 +36,7 @@ namespace AsyncApp
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                var result = await db.QueryAsync<TEntity>(sql, param, commandType: type);
-                return result;
+                return await db.QueryAsync<TEntity>(sql, param, commandType: type);
             }
         }
 
@@ -51,12 +49,11 @@ namespace AsyncApp
             }
         }
 
-        public static async Task<TEntity> FindById(string sql, int id, CommandType type = CommandType.Text)
+        public static async Task<IEnumerable<TEntity>> FindById(string sql, int id, CommandType type = CommandType.Text)
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                var result = await db.QueryAsync<TEntity>(sql, new { ID = id }, commandType: type);
-                return result.SingleOrDefault();
+                return await db.QueryAsync<TEntity>(sql, new { ID = id }, commandType: type);
             }
         }
 
@@ -64,8 +61,7 @@ namespace AsyncApp
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                var result = await db.ExecuteAsync(sql, param, commandType: type);
-                return result;
+                return await db.ExecuteAsync(sql, param, commandType: type);
             }
         }
 
@@ -73,17 +69,15 @@ namespace AsyncApp
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                var result = await db.ExecuteAsync(sql, param, commandType: type);
-                return result;
+                return await db.ExecuteAsync(sql, param, commandType: type);
             }
         }
 
-        public static async Task<int> ExecuteScalar(string sql, object param = null, CommandType type = CommandType.Text)
+        public static async Task<object> ExecuteScalar(string sql, object param = null, CommandType type = CommandType.Text)
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                var result = await db.ExecuteScalarAsync(sql, param, commandType: type);
-                return Convert.ToInt32(result);
+                return await db.ExecuteScalarAsync(sql, param, commandType: type);
             }
         }
 

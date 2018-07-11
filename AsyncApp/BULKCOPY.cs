@@ -36,7 +36,7 @@ namespace AsyncApp
         {
             var sql = "SELECT TOP 1 * FROM BULKCOPY WHERE NAME LIKE @NAME+'%';";
             if (!string.IsNullOrEmpty(listcolumn)) sql = sql.Replace("*", listcolumn);
-           
+
             var result = await DBManager<BULKCOPY>.ExecuteReader(sql, new { NAME = Name });
             return result;
         }
@@ -54,7 +54,7 @@ namespace AsyncApp
         {
             var sql = "SELECT COUNT(1) AS CNT FROM BULKCOPY WHERE 1=1 " + query;
             var result = await DBManager<BULKCOPY>.ExecuteScalar(sql);
-            return result;
+            return Convert.ToInt32(result);
         }
         public virtual async Task<int> Update1Column(int ID, string COLUMN, string VALUE)
         {
